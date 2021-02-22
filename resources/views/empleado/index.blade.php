@@ -53,7 +53,7 @@
             <form action="{{ url('/empleado/'.$empleado->id ) }}" class="d-inline" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
-                <input type="submit" class="btn btn-danger" onclick="return confirm('¿Estas seguro que quieres borrar?')" value="Borrar">
+                <input type="submit" class="btn btn-danger" onclick="return confirm('¿Estas seguro de borrar?')" value="Borrar">
             </form>
 
             </td>
