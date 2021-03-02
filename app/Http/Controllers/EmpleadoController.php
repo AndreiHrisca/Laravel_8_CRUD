@@ -38,7 +38,9 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //Validar campos.
+        /**
+         * Validar longitud de los campos parte back.
+         */
         $campos=[
             'Nombre'=>'required|string|max:100',
             'Apellido'=>'required|string|max:150',
@@ -52,7 +54,7 @@ class EmpleadoController extends Controller
         $this->validate($request, $campos, $mensaje);
 
         
-        //$datosEmpleado = $request->all();
+        
 
         $datosEmpleado = request()->except('_token');
         if($request->hasFile('Foto')){
@@ -61,7 +63,6 @@ class EmpleadoController extends Controller
 
         Empleado::insert($datosEmpleado);
 
-        // return response()->json($datosEmpleado);
         return redirect('empleado')->with('mensaje','Empleado agregado con éxito');
     }
 
