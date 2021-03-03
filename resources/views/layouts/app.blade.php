@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,8 +20,9 @@
 
     <!-- Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -54,6 +56,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -86,6 +89,12 @@
                                 </div>
                             </li>
                         @endguest
+
+                        
+                    <button class="switch" id="switch">
+                        <span><i class="fas fa-sun"></i></span>
+                        <span><i class="fas fa-moon"></i></span>
+                    </button>
                     </ul>
                 </div>
             </div>
@@ -95,5 +104,6 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('js/themes.js') }}" defer></script> 
 </body>
 </html>
