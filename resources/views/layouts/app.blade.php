@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'CRUD Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -39,7 +39,18 @@
                         <li class="nav-item">
                             <a href="{{ route('empleado.index') }}" class="nav-link">{{ __('Empleados') }}</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('cliente.index') }}" class="nav-link">{{ __('Clientes') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('proveedor.index') }}" class="nav-link">{{ __('Proveedores') }}</a>
+                        </li>
+
                     </ul>
+
+                    
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

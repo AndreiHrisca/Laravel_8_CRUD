@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\ProveedorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,9 @@ use App\Http\Controllers\EmpleadoController;
 |
 */
 
+/**
+ * Obliga al usuario logearse pidiendo el login primero.
+ */
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -25,11 +29,13 @@ Route::resource('empleado', EmpleadoController::class)->middleware('auth');
 //Auth::routes(['register'=>false,'reset'=>false]);
 Auth::routes(['reset'=>false]); //Quita la opcion de "olvidar contraseña". 
 
-Route::get('/home', [EmpleadoController::class, 'index'])->name('home'); 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 
+
+/**
+ * Una vez logueado te redirige a index.
+ */
 Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('/', [EmpleadoController::class, 'index'])->name('home');
-
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
 
@@ -41,5 +47,14 @@ Route::group(['middleware' => 'auth'], function () {
  * php artisan route:list
  */
 Route::resource('cliente', ClientesController::class);
+
+/* ---- ---- ---- ---- PROVEEDORES ---- ---- ---- ---- */
+
+
+/**
+ * Permite acceder a todas las url de ProveedorController.
+ * php artisan route:list
+ */
+Route::resource('proveedor', ProveedorController::class);
 
 

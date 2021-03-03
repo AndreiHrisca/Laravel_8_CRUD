@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Clientes;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class ClientesController extends Controller
+class ProveedorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        $datos['clientes']=Clientes::paginate(5);
-        return view('cliente.index',$datos);
+        $datos['proveedores']=Proveedor::paginate(5);
+        return view('proveedor.index',$datos);
     }
 
     /**
@@ -26,7 +26,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        return view('cliente.create');
+        return view('proveedor.create');
     }
 
     /**
@@ -37,13 +37,11 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-         /**
+        /**
          * Validar longitud de los campos parte back.
          */
         $campos=[
             'Nombre'=>'required|string|max:100',
-            'Apellido'=>'required|string|max:150',
-            'Dni'=>'required|string|max:9',
             'Correo'=>'required|email',
             'Foto'=>'required|max:1000|mimes:jpeg,png,jpg',
         ];
@@ -53,26 +51,25 @@ class ClientesController extends Controller
         ];
         $this->validate($request, $campos, $mensaje);
 
-        
 
 
-        $datosCliente = request()->except('_token');
+        $datosProveedor = request()->except('_token');
 
         if($request->hasFile('Foto')){
-            $datosCliente['Foto']=$request->file('Foto')->store('uploads','public'); /* Guarda la foto en la carpeta uploads. */
+            $datosProveedor['Foto']=$request->file('Foto')->store('uploads','public'); /* Guarda la foto en la carpeta uploads. */
         }
-        Clientes::insert($datosCliente);
+        Proveedor::insert($datosProveedor);
 
-        return response()->json($datosCliente);
+        return response()->json($datosProveedor);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Clientes  $clientes
+     * @param  \App\Models\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function show(Clientes $clientes)
+    public function show(Proveedor $proveedor)
     {
         //
     }
@@ -80,20 +77,20 @@ class ClientesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Clientes  $clientes
+     * @param  \App\Models\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $cliente=Clientes::findOrFail($id);
-        return view('cliente.edit', compact('cliente'));
+        $proveedor=Proveedor::findOrFail($id);
+        return view('proveedor.edit', compact('proveedor'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Clientes  $clientes
+     * @param  \App\Models\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -101,8 +98,6 @@ class ClientesController extends Controller
         //Validar campos.
         $campos=[
             'Nombre'=>'required|string|max:100',
-            'Apellido'=>'required|string|max:150',
-            'Dni'=>'required|max:9',
             'Correo'=>'required|email',
         ];
         $mensaje=[
@@ -118,39 +113,39 @@ class ClientesController extends Controller
 
 
         //
-        $datoscliente = request()->except(['_token','_method']);
+        $datosProveedor = request()->except(['_token','_method']);
 
         if($request->hasFile('Foto')){
-            $cliente = Clientes::findOrFail($id);
-            Storage::delete('public/'.$cliente->Foto);
-            $datoscliente['Foto']=$request->file('Foto')->store('uploads','public');
+            $proveedor = Proveedor::findOrFail($id);
+            Storage::delete('public/'.$proveedor->Foto);
+            $datosProveedor['Foto']=$request->file('Foto')->store('uploads','public');
         }
 
-        Clientes::where('id','=',$id)->update($datoscliente);
+        Proveedor::where('id','=',$id)->update($datosProveedor);
 
-        $cliente = Clientes::findOrFail($id);
+        $proveedor = Proveedor::findOrFail($id);
         
         
-        return redirect('cliente')->with('mensaje','cliente modificado.');
+        return redirect('proveedor')->with('mensaje','proveedor modificado.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Clientes  $clientes
+     * @param  \App\Models\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $cliente = Clientes::findOrFail($id);
+        $proveedor = Proveedor::findOrFail($id);
 
-        if(Storage::delete('public/'.$cliente->Foto)){
+        if(Storage::delete('public/'.$proveedor->Foto)){
             
-            Clientes::destroy($id);
+            Proveedor::destroy($id);
 
         }
 
         
-        return redirect('cliente')->with('mensaje','Cliente borrado.');
+        return redirect('proveedor')->with('mensaje','Proveedor borrado.');
     }
 }

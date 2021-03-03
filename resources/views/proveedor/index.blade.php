@@ -1,8 +1,9 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
 
-    <h2>Lista clientes</h2>
+    <h2>Lista proveedores</h2>
     
     @if(Session::has('mensaje'))
     <div class="alert alert-success alert-dismissible" role="alert">
@@ -18,7 +19,7 @@
     
 
 
-<a href="{{ url('cliente/create') }}" class="btn btn-success" >Registrar nuevo cliente</a>
+<a href="{{ url('proveedor/create') }}" class="btn btn-success" >Registrar nuevo proveedor</a>
 <br>
 <br>
 
@@ -28,26 +29,22 @@
             <th>Id</th>
             <th>Foto</th>
             <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Dni</th>
             <th>Correo</th>
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-    @foreach( $clientes as $cliente)
+    @foreach( $proveedores as $proveedor)
         <tr>
-            <td>{{ $cliente->id}}</td>
-            <td><img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$cliente->Foto }}" width="100px" alt=""></td>
-            <td>{{ $cliente->Nombre}}</td>
-            <td>{{ $cliente->Apellido}}</td>
-            <td>{{ $cliente->Dni}}</td>
-            <td>{{ $cliente->Correo}}</td>
+            <td>{{ $proveedor->id}}</td>
+            <td><img class="img-thumbnail img-fluid" src="{{ asset('storage').'/'.$proveedor->Foto }}" width="100px" alt=""></td>
+            <td>{{ $proveedor->Nombre}}</td>
+            <td>{{ $proveedor->Correo}}</td>
             
             <td>
-            <a href="{{ url('/cliente/' . $cliente->id . '/edit') }}" class="btn btn-warning">Editar</a>
+            <a href="{{ url('/proveedor/' . $proveedor->id . '/edit') }}" class="btn btn-warning">Editar</a>
              
-            <form action="{{ url('/cliente/'.$cliente->id ) }}" class="d-inline" method="post">
+            <form action="{{ url('/proveedor/'.$proveedor->id ) }}" class="d-inline" method="post">
                 @csrf
                 {{ method_field('DELETE') }}
                 <input type="submit" class="btn btn-danger" onclick="return confirm('¿Estas seguro de borrar?')" value="Borrar">
@@ -58,7 +55,7 @@
     @endforeach
     </tbody>
 </table>
-{!! $clientes->links() !!}
+{!! $proveedores->links() !!}
 </div>
 @endsection
 
@@ -66,7 +63,7 @@
 
 <script>
     $(document).ready(function() {
-    $('#clientes').DataTable( {
+    $('#proveedors').DataTable( {
         "serverSide": true,
         "ajax": "{{ url('api/users') }}"
         "columns": [

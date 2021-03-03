@@ -3,14 +3,13 @@
 @section('content')
 <div class="container">
 
+    <h2>Lista empleados</h2>
 
     @if(Session::has('mensaje'))
     <div class="alert alert-success alert-dismissible" role="alert">
     {{ Session::get('mensaje') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">
-                &times;
-            </span>
+            <span aria-hidden="true">&times;</span>
         </button>
     </div>
     @endif
@@ -47,7 +46,7 @@
             <td>{{ $empleado->Correo}}</td>
             
             <td>
-            <a href="{{ url('/empleado/' . $empleado->id . '/edit') }}" class="btn btn-warrning">Editar</a>
+            <a href="{{ url('/empleado/' . $empleado->id . '/edit') }}" class="btn btn-warning">Editar</a>
              
             
             <form action="{{ url('/empleado/'.$empleado->id ) }}" class="d-inline" method="post">
