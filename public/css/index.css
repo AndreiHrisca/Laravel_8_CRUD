@@ -11,6 +11,10 @@ body.dark {
   background: #413c69;
 }
 
+body .btn {
+  background-color: grey;
+}
+
 /* ----- ----- ----- ----- NAV ----- ----- ----- ----- */
 nav {
   background: #f1f1f1;
